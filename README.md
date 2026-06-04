@@ -18,7 +18,29 @@ To write and execute an 8085 program to sort a set of numbers in ascending order
 <br>Decrement B and repeat.
 4.	End.
 ## Program:
-## Output: 
+```
+; Input : 2 numbers at 8050H and 8051H
+; Output: Sorted in same locations
+
+LXI H,8050H   ; HL -> first number
+MOV A,M       ; A = first
+INX H         ; HL -> second
+CMP M         ; Compare A with second
+JC END        ; If first < second → already sorted
+
+; Swap
+MOV D,M       ; D = second
+MOV M,A       ; Put first into [8051H]
+DCX H         ; Back to first
+MOV M,D       ; Put second into [8050H]
+
+END: HLT
+```
+## Output:
+<img width="1905" height="893" alt="Screenshot 2025-08-31 205611" src="https://github.com/user-attachments/assets/b9af253a-9a68-4b75-bdb7-d02c695e4d06" />
+
+
+
 ## Result:
 The 8085 assembly language program was successfully executed to sort a set of numbers in ascending order.
 
@@ -40,6 +62,26 @@ To write and execute an 8085 program to sort a set of numbers in descending orde
 <br>If current < next, swap them.
 4. Repeat until sorted.
 ## Program:
+```
+; Input : 2 numbers at 8050H and 8051H
+; Output: Sorted (descending) in same locations
+
+LXI H,8050H   ; HL -> first number
+MOV A,M       ; A = first
+INX H         ; HL -> second
+CMP M         ; Compare A with second
+JNC END       ; If A >= second → already descending
+
+; Swap
+MOV D,M       ; D = second
+MOV M,A       ; Put first into [8051H]
+DCX H         ; Back to first
+MOV M,D       ; Put second into [8050H]
+
+END: HLT
+```
 ## Output: 
+<img width="1918" height="897" alt="Screenshot 2025-08-31 210854" src="https://github.com/user-attachments/assets/190702d4-f68d-4b19-80b6-338082c52337" />
+
 ## Result:
 The 8085 assembly language program was successfully executed to sort a set of numbers in descending order.
